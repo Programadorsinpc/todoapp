@@ -1,0 +1,12 @@
+<hr>
+<div *ngIf="name() ==='Nicolas'">
+    My content
+</div>
+
+<input type="number" [value]="person().age" (change)="changeAge($event)">
+<div *ngIf="person().name ==='Nicolas' && person().age > 18; else elseBlock">
+    Soy mayor
+</div>
+<ng-template #elseBlock>
+    Soy menor
+</ng-template>
