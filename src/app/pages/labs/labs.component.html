@@ -1,106 +1,135 @@
 <div class="container">
-    <h1>Proyecto nuevo en Angular 17</h1>
-    <h2>{{ welcome }}</h2>
+  <h1>Proyecto nuevo en Angular 17</h1>
+  <h2>{{ welcome }}</h2>
 
-    <hr>
+  <hr>
 
-    <div *ngIf="name() ==='Nicolas'">
+    @if (name() ==='Nicolas') {
+      <div>
         Soy Nicolas
-    </div>
+      </div>
+    }
 
     <h2>If new syntax</h2>
     @if (name() === 'Nicolas') {
-        <div>Soy Nicolas</div>
-    }@else{
-        <div>No soy nadie</div>
+      <div>Soy Nicolas</div>
+      }@else{
+      <div>No soy nadie</div>
     }
 
     <input type="number" [value]="person().age" (change)="changeAge($event)">
-    <div *ngIf="person().name ==='Nicolas' && person().age > 18; else elseBlock">
+    @if (person().name ==='Nicolas' && person().age > 18) {
+      <div>
         Soy mayor
-    </div>
-    <ng-template #elseBlock>
-        Soy menor
-    </ng-template>
+      </div>
+    } @else {
+      Soy menor
+    }
 
     @if (person().name ==='Nicolas' && person().age > 18) {
-        <div>Soy Nicolas y soy mayor de 18</div>
-    }@else{
-        <div>Soy Nicolas y soy menor de 18</div>
+      <div>Soy Nicolas y soy mayor de 18</div>
+      }@else{
+      <div>Soy Nicolas y soy menor de 18</div>
     }
 
     <hr>
-    <input type="text" [value]="person().name" (change)="changeName($event)">
-    <div [ngSwitch]="person().name">
-        <p *ngSwitchCase="'nicolas'">Soy yo, Nicolas</p>
-        <p *ngSwitchCase="'julian'">Soy yo, Julian</p>
-        <p *ngSwitchCase="'ana'">Soy yo, Ana</p>
-        <p *ngSwitchCase="'valentina'">Soy yo, Valentina</p>
-        <p *ngSwitchDefault>Nadie</p>
-    </div>
-    <hr>
-    <input type="color" [formControl]="colorCtrl">
-    <p>color: {{ colorCtrl.value }}</p>
-    <svg>
-        <g>
-            <rect x="0" y="0" height="100" width="100" [attr.fill]="colorCtrl.value"></rect>
-        </g>
-    </svg>
-    <hr>
-    <input type="number" [formControl]="widthCtrl">
-    <span class="box" [style.width.px]="widthCtrl.value"></span>
-    <hr>
-    <p>
-        <input type="text" [formControl]="nameCtrl"> <br>
-        <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Nombre invalido</span>
-    </p>
-    <p>
-        <input type="text">
-    </p>
-    <hr>
-    <h2>For new syntax</h2>
-    <ul>
-        <p>total: {{ tasks().length }}</p>
-        <li *ngFor="let task of tasks(); index as i">
-            {{ i }} {{ task }}
-        </li>
-    </ul>
-    <ul>
-        @for (task of tasks(); track task; let i = $index) {
-            <li>{{ i }} {{ task }}</li>
-        } @empty {
-            <li><strong>La lista esta vacia</strong></li>
-        }
-    </ul>
-
-    <hr>
-    <h2>Switch new syntax</h2>
-
-    <div [ngSwitch]="person().name">
-        <p *ngSwitchCase="'nicolas'">Soy yo, Nicolas</p>
-        <p *ngSwitchCase="'julian'">Soy yo, Julian</p>
-        <p *ngSwitchCase="'ana'">Soy yo, Ana</p>
-        <p *ngSwitchCase="'valentina'">Soy yo, Valentina</p>
-        <p *ngSwitchDefault>Nadie</p>
-    </div>
-
-    <div>
+      <input type="text" [value]="person().name" (change)="changeName($event)">
+      <div>
         @switch (person().name) {
-            @case ('nicolas') {
-                <p>Soy yo, Nicolas</p>
-            }
-            @case ('julian') {
-                <p>Soy yo, Julian</p>
-            }
-            @case ('ana') {
-                <p>Soy yo, Ana</p>
-            }
-            @case ('valentina') {
-                <p>Soy yo, Valentina</p>
-            }
-            @default {
-                <p>No se quien soy</p>
-            }
+          @case ('nicolas') {
+            <p>Soy yo, Nicolas</p>
+          }
+          @case ('julian') {
+            <p>Soy yo, Julian</p>
+          }
+          @case ('ana') {
+            <p>Soy yo, Ana</p>
+          }
+          @case ('valentina') {
+            <p>Soy yo, Valentina</p>
+          }
+          @default {
+            <p>Nadie</p>
+          }
         }
-    </div>
-</div>
+      </div>
+      <hr>
+        <input type="color" [formControl]="colorCtrl">
+        <p>color: {{ colorCtrl.value }}</p>
+        <svg>
+          <g>
+            <rect x="0" y="0" height="100" width="100" [attr.fill]="colorCtrl.value"></rect>
+          </g>
+        </svg>
+        <hr>
+          <input type="number" [formControl]="widthCtrl">
+          <span class="box" [style.width.px]="widthCtrl.value"></span>
+          <hr>
+            <p>
+              <input type="text" [formControl]="nameCtrl"> <br>
+              <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Nombre invalido</span>
+            </p>
+            <p>
+              <input type="text">
+            </p>
+            <hr>
+              <h2>For new syntax</h2>
+              <ul>
+                <p>total: {{ tasks().length }}</p>
+                @for (task of tasks(); track task; let i = $index) {
+                  <li>
+                    {{ i }} {{ task }}
+                  </li>
+                }
+              </ul>
+              <ul>
+                @for (task of tasks(); track task; let i = $index) {
+                  <li>{{ i }} {{ task }}</li>
+                  } @empty {
+                  <li><strong>La lista esta vacia</strong></li>
+                }
+              </ul>
+
+              <hr>
+                <h2>Switch new syntax</h2>
+
+                <div>
+                  @switch (person().name) {
+                    @case ('nicolas') {
+                      <p>Soy yo, Nicolas</p>
+                    }
+                    @case ('julian') {
+                      <p>Soy yo, Julian</p>
+                    }
+                    @case ('ana') {
+                      <p>Soy yo, Ana</p>
+                    }
+                    @case ('valentina') {
+                      <p>Soy yo, Valentina</p>
+                    }
+                    @default {
+                      <p>Nadie</p>
+                    }
+                  }
+                </div>
+
+                <div>
+                  @switch (person().name) {
+                    @case ('nicolas') {
+                      <p>Soy yo, Nicolas</p>
+                    }
+                    @case ('julian') {
+                      <p>Soy yo, Julian</p>
+                    }
+                    @case ('ana') {
+                      <p>Soy yo, Ana</p>
+                    }
+                    @case ('valentina') {
+                      <p>Soy yo, Valentina</p>
+                    }
+                    @default {
+                      <p>No se quien soy</p>
+                    }
+                  }
+                </div>
+              </div>
